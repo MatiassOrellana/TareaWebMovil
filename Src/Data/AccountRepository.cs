@@ -16,11 +16,12 @@ namespace courses_dotnet_api.Src.Data
 
         private readonly DataContext _dataContext;
 
-        //public readonly ITokenService _tokenService;
+        public readonly ITokenService _tokenService;
 
-        public AccountRepository(DataContext dataContext)
+        public AccountRepository(DataContext dataContext, ITokenService tokenService)
         {
             _dataContext = dataContext;
+            _tokenService = tokenService;
         }
 
         public async Task AddUserAsync(RegisterDTO regDTO)
@@ -57,8 +58,10 @@ namespace courses_dotnet_api.Src.Data
                     Rut = student.Rut,
                     Name = student.Name,
                     Email = student.Email,
-                    Token = _tokenService.CreateToken(user.Rut)
+                    Token = null
                 };
+
+            accountDto.Token = _tokenService.CreateToken(accountDto);
 
             return accountDto;
             }
@@ -67,9 +70,5 @@ namespace courses_dotnet_api.Src.Data
         {
             return 0 < await _dataContext.SaveChangesAsync();
         }
-    }
-
-    internal interface IMapper
-    {
     }
 }

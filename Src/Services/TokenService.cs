@@ -27,7 +27,7 @@ namespace courses_dotnet_api.Src.Services
 
         public string CreateToken(AccountDTO accountDTO)
         {
-            var claims = new List<Claim> { new(JwtRegisteredClaimNames.NameId, accountDTO.Rut), };
+            var claims = new List<Claim> { new(JwtRegisteredClaimNames.NameId, accountDTO.Rut) };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 

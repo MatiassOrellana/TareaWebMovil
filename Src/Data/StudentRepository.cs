@@ -31,16 +31,16 @@ public class StudentRepository : IStudentRepository
         return await _dataContext.Students.FindAsync(id);//Find sirve para solamnte para claves prmarias
     }
 
-    public async Task<Student?> GetStudentByRutAsync(string rut)
+    public async Task<bool> GetStudentByRutAsync(string rut)
     {
         //FirstOrDefault sirve para encontrar estudiantes por un atributo en especifico
-        return await _dataContext.Students.FirstOrDefaultAsync(s => s.Rut == rut);
+        return await _dataContext.Students.AnyAsync(s => s.Rut == rut);
     }
 
     
-    public async Task<Student?> GetStudentByEmailAsync(string email)
+    public async Task<bool> GetStudentByEmailAsync(string email)
     {
-        return await _dataContext.Students.FirstOrDefaultAsync(s => s.Email == email);
+        return await _dataContext.Students.AnyAsync(s => s.Email == email);
     }
 
     public async Task<IEnumerable<Student>> GetStudentsAsync()

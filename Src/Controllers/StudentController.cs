@@ -13,28 +13,6 @@ public class StudentController : BaseApiController
         _studentRepository = studentRepository;
     }
 
-    [HttpPost]
-    public async Task<IResult> CreateStudent(Student student)
-    {
-        Student? result = await _studentRepository.GetStudentByRutAsync(student.Rut);
-        if(result is not null){
-
-            return TypedResults.BadRequest("Student already exists");
-
-        }
-
-        await _studentRepository.AddStudentAsync(student);
-        bool SaveChangesAsync = await _studentRepository.SaveChangesAsync();
-
-        //si hubo un problema con la base de datos, en caso de los servicios
-        if(SaveChangesAsync){
-
-            return TypedResults.BadRequest("Hubo un error mientras se agrega al estudiante");
-
-        }
-        return TypedResults.Ok("El estudiante se agregó de manera exitosa");
-    }
-
     [HttpGet]
     public async Task<IResult> GetStudents()
     {
