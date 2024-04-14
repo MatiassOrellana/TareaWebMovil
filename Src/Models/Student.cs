@@ -6,6 +6,6 @@ public class Student
     public required string Rut { get; set; }
     public required string Name { get; set; }
     public required string Email { get; set; }
-    public required string PasswordEncrypt { get; set; }
-    public required string Salt { get; set; }
+    public required byte[] PasswordEncrypt { get; set; }
+    public required byte[] Salt { get; set; }
 }

@@ -12,7 +12,7 @@ namespace courses_dotnet_api.Src.Interfaces
         public Task<bool> SaveChangesAsync();
         
         /*method to registerUsers users so async*/
-        public Task AddUserAsync(RegisterDTO regUserDTO);
+        public Task AddUserAsync(RegisterDTO regDTO);
 
         public Task<AccountDTO?> GetAccountAsync(string email);
     }
