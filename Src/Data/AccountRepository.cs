@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using courses_dotnet_api.Src.DTO;
 using courses_dotnet_api.Src.Interfaces;
 using courses_dotnet_api.Src.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace courses_dotnet_api.Src.Data
 {
@@ -41,8 +42,26 @@ namespace courses_dotnet_api.Src.Data
 
         public async Task<AccountDTO?> GetAccountAsync(string email)
         {
-            throw new NotImplementedException();
-        }
+            Student? student = await _dataContext
+            .Students.Where(student => student.Email == email)
+            .FirstOrDefaultAsync();
+
+            if (student == null)
+            {
+                return null;
+            }
+
+            AccountDTO accountDto =
+                new()
+                {
+                    Rut = student.Rut,
+                    Name = student.Name,
+                    Email = student.Email,
+                    Token = _tokenService.CreateToken(user.Rut)
+                };
+
+            return accountDto;
+            }
 
         public async Task<bool> SaveChangesAsync()
         {
