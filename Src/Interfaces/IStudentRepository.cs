@@ -8,6 +8,9 @@ public interface IStudentRepository
     Task AddStudentAsync(Student student);
     Task<Student?> GetStudentByIdAsync(int id);
     Task<Student?> GetStudentByRutAsync(string rut);
+    //added
+    Task<Student?> GetStudentByEmailAsync(string email);
+
     Task<IEnumerable<Student>> GetStudentsAsync();
     Task<bool> UpdateStudentByIdAsync(int id, Student updateStudent);
     Task<bool> DeleteStudentByIdAsync(int id);

@@ -37,6 +37,12 @@ public class StudentRepository : IStudentRepository
         return await _dataContext.Students.FirstOrDefaultAsync(s => s.Rut == rut);
     }
 
+    
+    public async Task<Student?> GetStudentByEmailAsync(string email)
+    {
+        return await _dataContext.Students.FirstOrDefaultAsync(s => s.Email == email);
+    }
+
     public async Task<IEnumerable<Student>> GetStudentsAsync()
     {
         return await _dataContext.Students.ToListAsync();
@@ -71,4 +77,5 @@ public class StudentRepository : IStudentRepository
         return await _dataContext.Students.Where(x => x.Name.Contains(Name)).ToListAsync();;
 
     }
+
 }
